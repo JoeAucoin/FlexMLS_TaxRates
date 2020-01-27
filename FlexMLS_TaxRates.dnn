@@ -1,0 +1,62 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages><package name="GIBS.FlexMLS_TaxRates" type="Module" version="1.0.4">
+  <friendlyName>GIBS - FlexMLS - Tax Rates</friendlyName>
+  <description>GIBS - FlexMLS - Local Tax Rates</description>
+  <iconFile />
+  <owner>
+    <name>Joseph M Aucoin</name>
+    <organization>Global Internet Business Solutions</organization>
+    <url>www.gibs.com</url>
+    <email>jaucoin@gibs.com</email>
+  </owner>
+  <license>The license for this package is not currently included within the installation file, please check with the vendor for full license details.</license>
+  <releaseNotes />
+  <components>
+    <component type="ResourceFile">
+      <resourceFiles>
+        <basePath>DesktopModules/GIBS/FlexMLS_TaxRates</basePath>
+        <resourceFile>
+          <name>Resources.zip</name>
+        </resourceFile>
+      </resourceFiles>
+    </component>
+    
+    <component type="Module">
+      <desktopModule>
+        <moduleName>GIBS.FlexMLS_TaxRates</moduleName>
+        <foldername>GIBS/FlexMLS_TaxRates</foldername>
+        <businessControllerClass />
+        <supportedFeatures />
+        <moduleDefinitions>
+          <moduleDefinition>
+            <friendlyName>GIBS - FlexMLS - Tax Rates</friendlyName>
+            <definitionName>GIBS - FlexMLS - Tax Rates</definitionName>
+            <defaultCacheTime>0</defaultCacheTime>
+            <moduleControls>
+              <moduleControl>
+                <controlKey />
+                <controlSrc>DesktopModules/GIBS/FlexMLS_TaxRates/ViewFlexMLS_TaxRates.ascx</controlSrc>
+                <supportsPartialRendering>False</supportsPartialRendering>
+                <controlTitle />
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+            </moduleControls>
+          </moduleDefinition>
+        </moduleDefinitions>
+      </desktopModule>
+    </component>
+    <component type="Assembly">
+      <assemblies>
+        <basePath>bin</basePath>
+        <assembly>
+          <name>GIBS.Modules.FlexMLS_TaxRates.dll</name>
+        </assembly>
+      </assemblies>
+    </component>
+  </components>
+</package></packages>
+</dotnetnuke>
