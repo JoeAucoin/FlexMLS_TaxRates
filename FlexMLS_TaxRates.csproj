@@ -112,6 +112,7 @@
     <Content Include="BuildScripts\ModulePackage.targets" />
     <Content Include="BuildScripts\MSBuild.Community.Tasks.Targets" />
     <None Include="packages.config" />
+    <Content Include="README.md" />
     <None Include="web.config.old" />
     <None Include="web.config.Debug.old">
       <DependentUpon>web.config.old</DependentUpon>
