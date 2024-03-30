@@ -20,14 +20,31 @@ namespace GIBS.Modules.FlexMLS_TaxRates
     {
 
         public string _taxyear = "";
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
+
+
+                //JOE
+
+               // if (Request.QueryString["town"] != null && Request.QueryString["town"] != "")
+               //// if (Request.QueryString["town"].ToString().Length > 10)
+               // {
+                    
+               //     if (checkForSQLInjection(Request.QueryString["town"].ToString().Trim()))
+               //     {
+               //         lblH1Title.Text = "Bad boy . . . No Sql Injection Attack Here!!!";
+               //         return;
+               //     }
+               // }
                 if (!IsPostBack)
                 {
-                    lblH1Title.Text = "Cape Cod Real Estate Tax Rates";
+
+                   
+
+                        lblH1Title.Text = "Cape Cod Real Estate Tax Rates";
                     _taxyear = DateTime.Now.Year.ToString();
                     LoadTaxRates();
                     LoadTowns();
@@ -43,32 +60,68 @@ namespace GIBS.Modules.FlexMLS_TaxRates
 
         public void LoadTaxRates()
         {
-
+            
             try
             {
-             //   string year = DateTime.Now.Year.ToString();
+                //   string year = DateTime.Now.Year.ToString();
                 string town = "";
-
                 if (Request.QueryString["town"] != null && Request.QueryString["town"] != "")
                 {
-                    town = Request.QueryString["town"].ToString();
-                   // year = "";
-                    _taxyear = "";
-                    lblH1Title.Text = town + " Real Estate Tax Rate";
-                    GetSeoValues(town.ToString(), "");
-
+                    if (checkForSQLInjection(Request.QueryString["town"].ToString().Trim()))
+                   // if (Request.QueryString["town"].ToString().Length > 10)
+                    { 
+                        lblH1Title.Text = "Bad boy . . . No Sql Injection Attack Here!"; 
+                        return; 
+                    }
+                    else
+                    {
+                        // do nothing 
+                        town = Request.QueryString["town"].ToString();
+                        // year = "";
+                        _taxyear = "";
+                        lblH1Title.Text = town + " Real Estate Tax Rate";
+                        GetSeoValues(town.ToString(), "");
+                    }
                 }
+
+                //if (Request.QueryString["town"] != null && Request.QueryString["town"] != "")
+                //{
+
+
+
+
+                //}
 
                 if (Request.QueryString["TaxYear"] != null && Request.QueryString["TaxYear"] != "")
                 {
-                    //town = Request.QueryString["town"].ToString();
-                    // year = "";
-                    _taxyear = Request.QueryString["TaxYear"].ToString();
-                    lblH1Title.Text = _taxyear + " Cape Cod Real Estate Tax Rates";
-                   // GetSeoValues(town.ToString());
-                    GetSeoValues(town.ToString(), _taxyear.ToString());
-
+                    if (checkForSQLInjection(Request.QueryString["TaxYear"].ToString().Trim()))
+                    // if (Request.QueryString["town"].ToString().Length > 10)
+                    {
+                        lblH1Title.Text = "Bad boy . . . No Sql Injection Attack on TaxYear!";
+                        return;
+                    }
+                    else
+                    {
+                        _taxyear = Request.QueryString["TaxYear"].ToString();
+                        lblH1Title.Text = _taxyear + " Cape Cod Real Estate Tax Rates";
+                        // GetSeoValues(town.ToString());
+                        GetSeoValues(town.ToString(), _taxyear.ToString());
+                    }
                 }
+
+
+
+
+                //if (Request.QueryString["TaxYear"] != null && Request.QueryString["TaxYear"] != "")
+                //{
+                //    //town = Request.QueryString["town"].ToString();
+                //    // year = "";
+                //    _taxyear = Request.QueryString["TaxYear"].ToString();
+                //    lblH1Title.Text = _taxyear + " Cape Cod Real Estate Tax Rates";
+                //    // GetSeoValues(town.ToString());
+                //    GetSeoValues(town.ToString(), _taxyear.ToString());
+
+                //}
 
                 List<FlexMLSInfo> items;
                 FlexMLSController controller = new FlexMLSController();
@@ -136,7 +189,7 @@ namespace GIBS.Modules.FlexMLS_TaxRates
                 else
                 {
                     DotNetNuke.Framework.CDefault GIBSpage = (DotNetNuke.Framework.CDefault)this.Page;
-                    GIBSpage.Title =  _town.ToString() + " Real Estate Tax Rates";
+                    GIBSpage.Title = _town.ToString() + " Real Estate Tax Rates";
                     GIBSpage.KeyWords = _town.ToString() + ", " + _taxyear.ToString() + ", " + _town.ToString() + " Tax Rate, " + GIBSpage.KeyWords.ToString();
                     GIBSpage.Description = _taxyear.ToString() + " " + _town.ToString() + " tax rates. " + GIBSpage.Description.ToString();   // +" " + Settings["PageTitle"].ToString() + ". " + Settings["PageDescription"].ToString();
                     GIBSpage.Author = "Joseph M Aucoin, GIBS";
@@ -160,21 +213,22 @@ namespace GIBS.Modules.FlexMLS_TaxRates
 
                 //StringBuilder _SearchCriteria = new StringBuilder();
                 //_SearchCriteria.Capacity = 500;
-                string townname = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Town"));
+                string townname = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "Town").ToString());
                 string taxyear = Convert.ToString(DataBinder.Eval(e.Row.DataItem, "TaxYear"));
                 //string _pageName = DataBinder.Eval(e.Row.DataItem, "Town").ToString().Replace(" ", "_").ToString().Replace("&", "").ToString() + ".aspx";
                 string _pageName = DataBinder.Eval(e.Row.DataItem, "Town").ToString().Replace(" ", "_").ToString().Replace("&", "").ToString() + "_Tax_Rates.aspx";
 
                 HyperLink eLink = (HyperLink)e.Row.FindControl("Hyperlink2");
-
+                //EditUrl()
 
                 string vLink = Globals.NavigateURL("View", "Town", townname.ToString());
                 vLink = vLink.ToString().Replace("ctl/View/", "");
                 vLink = vLink.ToString().Replace("Default.aspx", _pageName.ToString());
                 eLink.Text = DataBinder.Eval(e.Row.DataItem, "Town").ToString() + " Real Estate Tax Rate";
+               // eLink.Text = PortalSettings.ActiveTab.Url.ToString();
                 eLink.NavigateUrl = vLink.ToString();
 
-                if (_taxyear.ToString() != DateTime.Now.Year.ToString() )
+                if (_taxyear.ToString() != DateTime.Now.Year.ToString())
                 {
                     //HyperlinkTaxYear
                     HyperLink HyperlinkTaxYear = (HyperLink)e.Row.FindControl("HyperlinkTaxYear");
@@ -183,7 +237,7 @@ namespace GIBS.Modules.FlexMLS_TaxRates
                     vLink2 = vLink2.ToString().Replace("ctl/View/", "");
                     vLink2 = vLink2.ToString().Replace("Default.aspx", _pageName2.ToString());
                     HyperlinkTaxYear.NavigateUrl = vLink2.ToString();
-                    
+
                 }
 
 
@@ -191,6 +245,62 @@ namespace GIBS.Modules.FlexMLS_TaxRates
             }
 
         }
+
+        public static Boolean checkForSQLInjection(string userInput)
+
+        {
+
+            bool isSQLInjection = false;
+
+            string[] sqlCheckList = { "--",
+                                       ";--",
+                                       ";",
+                                       "/*",
+                                       "*/",
+                                        "@@",
+                                        "@",
+                                        "char",
+                                       "nchar",
+                                       "varchar",
+                                       "nvarchar",
+                                       "alter",
+                                       "begin",
+                                       "cast",
+                                       "create",
+                                       "cursor",
+                                       "declare",
+                                       "delete",
+                                       "drop",
+                                       "end",
+                                       "exec",
+                                       "execute",
+                                       "fetch",
+                                       "insert",
+                                       "kill",
+                                       "select",
+                                       "sys",
+                                       "sysobjects",
+                                       "syscolumns",
+                                       "table",
+                                       "update"
+                                       };
+
+            string CheckString = userInput.Replace("'", "''");
+
+            for (int i = 0; i <= sqlCheckList.Length - 1; i++)
+
+            {
+
+                if ((CheckString.IndexOf(sqlCheckList[i], StringComparison.OrdinalIgnoreCase) >= 0))
+
+                { isSQLInjection = true; }
+            }
+
+            return isSQLInjection;
+        }
+
+
+
 
         protected void RepeaterTowns_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {

@@ -70,11 +70,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\bin\GIBS.Modules.FlexMLS.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\Microsoft.ApplicationBlocks.Data.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -105,7 +100,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="web.config" />
+    <None Include="web.config.sav" />
     <Content Include="FlexMLS_TaxRates.dnn">
       <SubType>Designer</SubType>
     </Content>
@@ -120,11 +115,11 @@
     <None Include="web.config.Release.old">
       <DependentUpon>web.config.old</DependentUpon>
     </None>
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
+    <None Include="web.config.Debug.sav">
+      <DependentUpon>web.config.sav</DependentUpon>
     </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
+    <None Include="web.config.Release.sav">
+      <DependentUpon>web.config.sav</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

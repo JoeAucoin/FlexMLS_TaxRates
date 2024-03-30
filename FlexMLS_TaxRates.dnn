@@ -1,5 +1,5 @@
 ﻿<dotnetnuke type="Package" version="5.0">
-  <packages><package name="GIBS.FlexMLS_TaxRates" type="Module" version="1.0.5">
+  <packages><package name="GIBS.FlexMLS_TaxRates" type="Module" version="1.0.8">
   <friendlyName>GIBS - FlexMLS - Tax Rates</friendlyName>
   <description>GIBS - FlexMLS - Local Tax Rates</description>
   <iconFile />

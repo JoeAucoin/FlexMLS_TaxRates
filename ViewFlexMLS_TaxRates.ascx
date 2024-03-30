@@ -32,7 +32,7 @@ text-align: center;">
                 <ItemTemplate>
 
 
-               <asp:Hyperlink runat= "server" Text='<%# DataBinder.Eval(Container.DataItem,"Town")%>' ID="Hyperlink2"/>   
+               <asp:Hyperlink runat= "server" ID="Hyperlink2"/>   
                 </ItemTemplate>
         </asp:TemplateField> 
 
