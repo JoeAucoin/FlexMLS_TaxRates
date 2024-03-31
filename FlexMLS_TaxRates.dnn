@@ -12,6 +12,24 @@
   <license>The license for this package is not currently included within the installation file, please check with the vendor for full license details.</license>
   <releaseNotes />
   <components>
+
+    <component type="Script">
+      <scripts>
+        <basePath>DesktopModules\GIBS\FlexMLS_TaxRates</basePath>
+        <script type="Install">
+          <path>Providers\DataProviders</path>
+          <name>00.00.08.SqlDataProvider</name>
+          <version>00.00.08</version>
+        </script>
+       
+        <script type="UnInstall">
+          <path>Providers\DataProviders</path>
+          <name>Uninstall.SqlDataProvider</name>
+          <version>00.00.08</version>
+        </script>
+      </scripts>
+    </component>    
+    
     <component type="ResourceFile">
       <resourceFiles>
         <basePath>DesktopModules/GIBS/FlexMLS_TaxRates</basePath>

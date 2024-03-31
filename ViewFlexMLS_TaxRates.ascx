@@ -4,31 +4,25 @@
 
 <h1 style="text-align: center;"><asp:Label ID="lblH1Title" runat="server"></asp:Label></h1>
 
-<div style="width: 90%;margin-left:auto;
-    margin-right:auto;
-text-align: center;">
+<div style="display: grid;justify-content: center;">
 
-    <div align="center">
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="ItemID" 
+    
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Town" HorizontalAlign="Center" 
             OnRowDataBound="GridView1_RowDataBound" OnRowCommand="GridView1_RowCommand"  
             OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" 
             GridLines="None" 
-            CssClass="dnnGrid">
-    <AlternatingRowStyle cssclass="dnnGridAltItem" />
-    <FooterStyle cssclass="dnnGridFooter" />
-    <HeaderStyle cssclass="dnnGridHeader" />
-    <PagerStyle cssclass="dnnGridPager" />
-    <RowStyle cssclass="dnnGridItem" />
+            CssClass="table table-striped table-responsive">
+
         <Columns>
 
 
         <asp:TemplateField Headertext ="Tax Year" ItemStyle-Width="90px" ItemStyle-HorizontalAlign="Center">
             <ItemTemplate>
-               <asp:Hyperlink runat= "server" Text='<%# DataBinder.Eval(Container.DataItem,"TaxYear")%>' ID="HyperlinkTaxYear"/>   
+               <asp:Hyperlink runat="server" Text='<%# DataBinder.Eval(Container.DataItem,"TaxYear")%>' ID="HyperlinkTaxYear"/>   
             </ItemTemplate>
         </asp:TemplateField> 
 
-        <asp:TemplateField Headertext ="Town">
+        <asp:TemplateField Headertext="Town">
                 <ItemTemplate>
 
 
@@ -50,5 +44,3 @@ text-align: center;">
     </ItemTemplate>
     </asp:Repeater></p>
 
-
-</div>

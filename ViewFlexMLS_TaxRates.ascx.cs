@@ -12,7 +12,7 @@ using DotNetNuke.Services.Localization;
 //using GIBS.Modules.FlexMLS_TaxRates.Components;
 //using GIBS.Modules.FlexMLS.Components;
 using DotNetNuke.Common;
-using GIBS.Modules.FlexMLS.Components;
+using GIBS.Modules.FlexMLS_TaxRates.Components;
 
 namespace GIBS.Modules.FlexMLS_TaxRates
 {
@@ -123,8 +123,8 @@ namespace GIBS.Modules.FlexMLS_TaxRates
 
                 //}
 
-                List<FlexMLSInfo> items;
-                FlexMLSController controller = new FlexMLSController();
+                List<TaxRatesInfo> items;
+                Controller controller = new Controller();
 
                 items = controller.TaxRates_GetList(town.ToString(), _taxyear.ToString());
 
@@ -151,8 +151,8 @@ namespace GIBS.Modules.FlexMLS_TaxRates
                 string town = "";
 
 
-                List<FlexMLSInfo> items;
-                FlexMLSController controller = new FlexMLSController();
+                List<TaxRatesInfo> items;
+                Controller controller = new Controller();
 
                 items = controller.TaxRates_GetList(town.ToString(), DateTime.Now.Year.ToString());
 
@@ -281,7 +281,7 @@ namespace GIBS.Modules.FlexMLS_TaxRates
                                        "sys",
                                        "sysobjects",
                                        "syscolumns",
-                                       "table",
+                                      
                                        "update"
                                        };
 

@@ -1,0 +1,93 @@
+﻿
+
+/****** Object:  Table [dbo].[GIBS_TaxRates]    Script Date: 3/30/2024 2:10:20 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GIBS_TaxRates]') AND type in (N'U'))
+DROP TABLE [dbo].[GIBS_TaxRates]
+GO
+
+/****** Object:  Table [dbo].[GIBS_TaxRates]    Script Date: 3/30/2024 2:10:20 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[GIBS_TaxRates](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Town] [varchar](50) NULL,
+	[TaxYear] [char](4) NULL,
+	[TaxRate] [money] NULL,
+	[isActive] [char](1) NULL,
+	[OwnerID] [int] NULL
+) ON [PRIMARY]
+GO
+
+
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[GIBS_TaxRates_GetList]    Script Date: 3/30/2024 2:26:53 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GIBS_TaxRates_GetList]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[GIBS_TaxRates_GetList]
+GO
+
+/****** Object:  StoredProcedure [dbo].[GIBS_TaxRates_GetList]    Script Date: 3/30/2024 2:26:53 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+-- =============================================
+-- Author:		Joseph Aucoin
+-- Create date: 03/05/2014
+-- Description:	Get Cape Cod Tax Rates
+-- =============================================
+CREATE PROCEDURE [dbo].[GIBS_TaxRates_GetList] 
+
+	@Town varchar(50),
+	@Year varchar(4)
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	
+
+declare @sql NVARCHAR(max) , @CurrentYear VARCHAR(4) 
+Set @CurrentYear = year(getdate())
+--declare 
+
+	
+	SET @sql = 'select REPLACE(TaxRates.Town, CHAR(13)+CHAR(10), '''') AS [Town],  ' 
+	SET @sql = @sql + 'cast(TaxRates.TaxRate as decimal(10,2)) as [TaxRate], '
+	SET @sql = @sql + 'TaxRates.TaxYear '
+	SET @sql = @sql + 'from dbo.GIBS_TaxRates TaxRates '
+	--SET @sql = @sql + 'dbo.TaxRates '
+	SET @sql = @sql + ' WHERE  '
+	SET @sql = @sql + ' TaxRates.isActive =  ''y''' 
+	--SET @sql = @sql + ' AND   ' + @PriceHigh + ')'
+
+	IF (len(@Town) > 0)
+	SET @sql = @sql + ' AND TaxRates.Town = ''' + @Town + ''''
+
+	IF (len(@Year) > 0)
+	SET @sql = @sql + ' AND TaxRates.TaxYear = ''' + @Year + ''''	
+	--ELSE
+	--SET @sql = @sql + ' AND TaxRates.TaxYear = ''' + @CurrentYear + ''''
+	----SET @sql = @sql + ' AND TaxRates.TaxYear = ''2014'''
+	
+	SET @sql = @sql + '	order by TaxRates.Town, TaxRates.TaxYear desc, TaxRates.TaxRate	'
+
+--	print @sql
+
+	execute sp_executesql @sql
+	
+	END
+GO
+
+
